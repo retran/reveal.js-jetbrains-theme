@@ -1,0 +1,301 @@
+/**
+ * reveal.js is Copyright (C) 2011-2012 Hakim El Hattab, http://hakim.se
+ */
+
+ @use "sass:list";
+ @use "sass:map";
+ 
+ @import "../template/mixins";
+ @import "../template/settings";
+ @import url(https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap);
+ @import url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@500;700&display=swap);
+ @import url(https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap);
+ 
+ $theme-colors: (1:#24b89f, 2:#fc801d, 3:#ff318c, 4:#6b57ff, 5:#087cfa);
+ 
+ $backgroundColor: #000;
+ $slideBackgroundColor: #27282c;
+ $mainColor: #FFF;
+ $headingColor: #FFF;
+ 
+ $mainFont: 'Open Sans', sans-serif;
+ $mainFontSize: 37px;
+ 
+ $headingFont: 'Inter', sans-serif;
+ $headingFontWeight: bold;
+ $headingTextShadow: none;
+ $headingTextTransform: none;
+ $heading1Size: 128px;
+ $heading2Size: 128px;
+ $heading3Size: 88px;
+ $heading4Size: 45px;
+ 
+ $codeFont: 'JetBrains Mono', monospace;
+ 
+ $linkColor: #ff318c;
+ $linkColorHover: #ff318c;
+ 
+ @import "../template/theme";
+ 
+ .reveal.slide .slides > section {
+     min-height: 100% !important;
+     display: flex !important;
+     flex-direction: column !important;
+     justify-content: center !important;
+     position: absolute !important;
+     top: 0 !important;
+     align-items: left !important;
+     background-color: $slideBackgroundColor;
+ 
+     @each $index, $color in $theme-colors {
+         .theme-color#{$index} {
+             fill: $color;
+             stroke: $color;
+         }
+     
+         span.text-color#{$index} { color: $color; }
+     
+         span.text-background#{$index} { background-color: $color; }
+     }
+ 
+     &.small {
+         p, h5, ul, ol, span.katex-display, pre.code-wrapper { font-size: 21px; }
+     }
+ 
+     &.text-only {
+         justify-content: flex-start !important;
+         p, h5, ul, ol, span.katex-display, svg, img, pre.code-wrapper {
+             transform: translateY(86px);
+         }
+     }
+     
+     &.no-header {
+         justify-content: center !important;
+         p, h5, ul, ol, span.katex-display, div.mermaid, svg, img, pre.code-wrapper {
+             margin: 0px;
+             transform: none;
+         }
+     }
+ 
+     &.background-full, &.background, &.background-resharper, &.background-empty {
+         background-size: contain;
+         background-color: transparent;
+     }
+ 
+     &.background-full { background-image: url("../../assets/Background-01.png"); }
+     &.background { background-image: url("../../assets/JetBrains.png"); }
+     &.background-resharper { background-image: url("../../assets/ReSharper.png"); }
+     
+     .row {
+         display: flex;
+         margin-left: 56px;
+         margin-right: 56px;
+     }
+       
+     .column, .column-center, .column3, .column52, .column53 {
+         p, h5, ul, ol, svg, img {
+             margin-left: 30px;
+             margin-right: 30px;    
+         }
+         text-align: left;
+     }
+ 
+     .column { flex: 50%; }
+     .column-center { flex: 50%; text-align: center; }
+     .column3 { flex: 33%; }
+     .column52 { flex: 40%; }
+     .column53 { flex: 60%; }
+ 
+     h1, h2, h3, h4 { position: absolute; }
+ 
+     h1, h2, h3, h4, h5 {
+         font-weight: 700;
+     
+         margin-top: 0px;
+         margin-bottom: 0px;
+         margin-left: 86px;
+         margin-right: 86px;
+     
+         text-align: left;
+         vertical-align: bottom;
+         z-index:500;    
+     }
+ 
+     h1 {
+         height: 235px;    
+         padding-top: 19px;
+         padding-bottom: 19px;
+         top: 265px;
+     }
+ 
+     h2 {
+         height: 235px;    
+         padding-top: 165px;
+         padding-bottom: 21px;
+         top: 293px;
+ 
+         .two-lines {
+             height: 400px;    
+             padding-top: 0px;
+         }
+     }
+ 
+     h3 {
+         height: 116px;    
+         padding-top: 125px;
+         padding-bottom: 19px;
+         top: 60px;
+ 
+         .two-lines {
+             height: 222px;    
+             padding-top: 19px;
+         }    
+     }
+     
+     h4 {
+         height: 50px;
+         padding-top: 0;
+         top: 300px;    
+     }
+     
+     h5 {
+         font-family: $mainFont;
+         font-size: $mainFontSize;
+     }
+ 
+     p, h5, ul, ol, span.katex-display, pre.code-wrapper, svg, img, div.mermaid {
+         margin-left: 86px;
+         margin-right: 86px;
+     }
+ 
+     p, h5, ul, ol, span.katex-display, pre.code-wrapper, svg, img { transform: translateY(110px); }
+ 
+     pre.code-wrapper { font-size: $mainFontSize; }
+ 
+     p, h5, ul, ol, span.katex-display {
+         text-align: left;
+         vertical-align: baseline;
+         margin-block-start: 0.5em;
+         margin-block-end: 0em;
+     
+         b { font-weight: 700; }
+     }
+     
+     ul, ol { list-style-position: outside; }
+     
+     li {
+         margin-block-start: 0.5em;
+         margin-block-end: 0.5em;
+     }
+     
+     p.code { font-family: $codeFont; }
+     i { font-style: italic; }
+     a { text-decoration: underline; transition: none; }
+ 
+     p.name-and-position-label {
+         padding-top: 15px;
+         top: 743px;
+         position: absolute;
+         transform: none;
+     }
+     
+     p.main-point-label {
+         text-align: center;
+         font-family: $headingFont;
+         font-weight: 700;
+         font-size: 88px;
+         padding-top: 20px;
+         padding-bottom: 20px;
+         transform: none;
+     }
+     
+     p.big-number-label {
+         text-align: center;
+         font-family: $headingFont;
+         font-weight: 700;
+         font-size: 320px;
+         padding-top: 0px;
+         padding-bottom: 0px;
+         margin-block-start: 0em;
+         margin-block-end: 0em;
+     }
+     
+     p.caption-label {
+         text-align: center;
+         padding-top: 0px;
+         padding-bottom: 0px;
+         margin-block-start: 0em;
+         margin-block-end: 0em;
+     }
+     
+     p.question-label {
+         width: 1748px;
+         text-align: left;
+         font-family: $headingFont;
+         font-weight: 700;
+         font-size: 88px;
+         padding-top: 20px;
+         padding-bottom: 20px;
+         transform: none;
+         top: 150px;
+         position: absolute;
+         margin-left: 86px;
+         margin-right: 86px;
+     }
+     
+     p.answer-label {
+         width: 1748px;
+         text-align: right;
+         font-family: $headingFont;
+         font-weight: 500;
+         font-size: 88px;
+         padding-top: 20px;
+         padding-bottom: 20px;
+         transform: none;
+         top: 548px;
+         position: absolute;
+         margin-left: 86px;
+         margin-right: 86px;
+     }
+  
+     p.event-name-label {
+         padding-top: 15px;
+         top: 92px;
+         position: absolute;
+         transform: none;
+     }    
+ 
+     svg, img {
+         margin-top: 0px;
+         margin-bottom: 0px;
+     }
+ 
+     img.topleft {
+         width: 976px;
+         top: 144px;
+         position: absolute;
+         transform: none;
+         margin-left: 86px;
+         margin-right: 86px;
+     }    
+ 
+     img.bottomright {
+         margin-left: 857px;
+         width: 976px;
+         top: 343px;
+         position: absolute;
+         transform: none;
+         margin-right: 86px;
+     }    
+ 
+ 
+     .jb-square-logo {
+         background-image: url("../../assets/jb_square.svg");
+         background-size: contain;
+         width: 83px;
+         height: 83px;
+         position: absolute; 
+         top: 892px;
+         left: 86px;
+     }
+ }
